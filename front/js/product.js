@@ -93,7 +93,12 @@ function addBasket() {
 
         // création OU modification du localStorage
         window.localStorage.setItem(idStorage, infoProductBasket);
-        return console.log("Ajouté au panier");
+        // informer l'utilisateur de l'ajout
+        console.log("Ajouté au panier");
+        alert('Produit ajouté au panier');
+
+        // rediriger vers le panier
+        return window.location.assign(`./cart.html`);
     }
 
 }
