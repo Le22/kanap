@@ -25,6 +25,7 @@ function listBasket() {
     for(let i = 0; i < basket.length; i++) {
         createProduct(i);
     }
+    getTotalPrice();
 }
 
 /**
@@ -42,7 +43,6 @@ function createProduct(i) {
             <div class="cart__item__content__description">
                 <h2>${basket[i][5]}</h2>
                 <p>${basket[i][1]}</p>
-                <p>${basket[i][6]} €</p>
             </div>
             <div class="cart__item__content__settings">
                 <div class="cart__item__content__settings__quantity">
@@ -66,18 +66,35 @@ function createProduct(i) {
 function displayProduct(product) {
     const cart = document.getElementById("cart__items");
     cart.appendChild(product);
-
     console.log(basket);
-    getTotalPrice();
 }
 
 /**
  * Afficher le prix total et le nombre d'articles
  */
-function getTotalPrice() {
+async function getTotalPrice() {
     // Création variable prix totale et quantité totale
     let quantityTotal = 0;
     let priceTotal = 0;
+
+    for (let i = 0; i < basket.length; i++) {
+        // GET le produit du panier
+        res = await fetch(`http://localhost:3000/api/products/${basket[i][0]}`)
+        newData = await res.json();
+
+        // mettre prix dans le tableau
+        basket[i].push(newData.price);
+
+        // rechercher le produit dans le panier
+        elt = document.querySelector(`[data-id="${newData._id}"] .cart__item__content__description`);
+
+        // créer un nex elt avec le prix
+        priceElt = document.createElement('p')
+        priceElt.innerHTML = `${basket[i][6]} €`
+
+        // ajouter le prix au DOM
+        elt.appendChild(priceElt)
+    }
 
     // Récupérer tout les prix et quantités
     for(let i = 0; i < basket.length; i++) {

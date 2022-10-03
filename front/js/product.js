@@ -118,7 +118,7 @@ function getInfosProduct() {
     const productColor = document.getElementById('colors').value;
 
     // Array des infos
-    const infoProductBasket = [productId, productColor, quantity, dataProduct.imageUrl, dataProduct.altTxt, dataProduct.name, dataProduct.price];
+    const infoProductBasket = [productId, productColor, quantity, dataProduct.imageUrl, dataProduct.altTxt, dataProduct.name];
     return infoProductBasket;
 
 }
