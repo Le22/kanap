@@ -79,7 +79,12 @@ function addBasket() {
     // SI toutes les informations n'ont pas été selectionnées
     if (!infoProductBasket[0] || infoProductBasket[1] === '' || infoProductBasket[2] === 0) {
         return console.log("Mauvaise saisi de l'utilisateur");
-    } else {
+
+    // SI produit négatidf
+    } else if (infoProductBasket[2] < 0) {
+        return console.log("Quantité du produit négatif");
+    }
+    else {
         // création de l'ID de stockage
         const idStorage = infoProductBasket[0] + infoProductBasket[1];
 

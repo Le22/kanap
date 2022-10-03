@@ -148,6 +148,10 @@ function modifyProduct(uptdateProduct) {
 
     data = JSON.parse(localStorage.getItem(idStorage));
 
+    // IF produit négatidf
+    if (uptdateProduct[2] < 0) {
+        return console.log("Quantité du produit négatif");
+    }
     data[2] = uptdateProduct[2];
     // Création de la liste des infos du panier
     data = JSON.stringify(data)
